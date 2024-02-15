@@ -12,7 +12,15 @@ public class MemberDTO {
 	private Date ur_reg_date;
 	
 	// 기본 생성자
-    public MemberDTO() {}
+    public MemberDTO() { //값이 없으면 죄다 null
+    	this.ur_no = 0;
+    	this.ur_id = null; 
+        this.ur_passwd = null; 
+        this.ur_name = null; 
+        this.ur_email = null; 
+        this.ur_birth_date = null;
+        this.ur_reg_date = null;
+    }
 
     // 매개변수를 받는 생성자
     public MemberDTO(int ur_no, String ur_id, String ur_passwd, String ur_name, String ur_email, Date ur_birth_date, Date ur_reg_date) {

@@ -28,19 +28,14 @@ public class MemberController {
 	
 	@GetMapping("/member/login")
 	public String getMemberPage() {
-		return "/member/login";
+		return "member/login";
 	}
 	
-	@PostMapping("/member/login")
-	public String checkMemberLogin() {
-		
-		return "/board/main";
-	}
 	
 	@GetMapping("/member/register")
 	public String memberRegister() {
 		//회원가입은 누구나 환영
-		return "/member/register";
+		return "member/register";
 	}
 	
 	

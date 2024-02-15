@@ -4,19 +4,33 @@ import java.sql.Date;
 
 public class BoardDTO {
     private int bd_no;
-    private String ur_id;
+    private int ur_no;
+    private String ur_name;    
     private String bd_name;
+    private String bd_info;
     private String bd_type;
     private int bd_auth;
     private int bd_hit;
     private Date bd_reg_date;
 
-    public BoardDTO() {}
+    public BoardDTO() {
+    	this.bd_no = 0;
+    	this.ur_no = 0;
+    	this.ur_name = "unknown";
+    	this.bd_name = null;
+    	this.bd_info = null;
+        this.bd_type = null;
+        this.bd_auth = 4;
+        this.bd_hit = 0;
+        this.bd_reg_date = null;
+    }
 
-    public BoardDTO(int bd_no, String ur_id, String bd_name, String bd_type, int bd_auth, int bd_hit, Date bd_reg_date) {
+    public BoardDTO(int bd_no, int ur_no, String ur_name,String bd_name,String bd_info, String bd_type, int bd_auth, int bd_hit, Date bd_reg_date) {
         this.bd_no = bd_no;
-        this.ur_id = ur_id;
+        this.ur_no = ur_no;
+        this.ur_name = ur_name;
         this.bd_name = bd_name;
+        this.bd_info = bd_info;
         this.bd_type = bd_type;
         this.bd_auth = bd_auth;
         this.bd_hit = bd_hit;
@@ -28,14 +42,21 @@ public class BoardDTO {
         return bd_no;
     }
 
-    public String getUr_id() {
-        return ur_id;
+    public int getUr_no() {
+        return ur_no;
     }
-
+    
+    public String getUr_name() {
+    	return ur_name;
+    }
     public String getBd_name() {
         return bd_name;
     }
-
+    
+    public String getBd_info() {
+    	return bd_info;
+    }
+    
     public String getBd_type() {
         return bd_type;
     }
@@ -57,14 +78,22 @@ public class BoardDTO {
         this.bd_no = bd_no;
     }
 
-    public void setUr_id(String ur_id) {
-        this.ur_id = ur_id;
+    public void setUr_no(int ur_no) {
+        this.ur_no = ur_no;
     }
-
+    
+    public void setUr_name(String ur_name) {
+    	this.ur_name = ur_name;
+    }
+    
     public void setBd_name(String bd_name) {
         this.bd_name = bd_name;
     }
-
+    
+    public void setBd_info(String bd_info) {
+    	this.bd_info = bd_info;
+    }
+    
     public void setBd_type(String bd_type) {
         this.bd_type = bd_type;
     }
@@ -86,7 +115,8 @@ public class BoardDTO {
     public String toString() {
         return "BoardDTO{" +
                 "bd_no=" + bd_no +
-                ", ur_id='" + ur_id + '\'' +
+                ", ur_id='" + ur_no + '\'' +
+                ", ur_name='" + ur_name + '\'' +
                 ", bd_name='" + bd_name + '\'' +
                 ", bd_type='" + bd_type + '\'' +
                 ", bd_auth=" + bd_auth +

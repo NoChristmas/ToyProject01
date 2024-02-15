@@ -19,8 +19,25 @@ public class MemberRestController {
 	@Autowired 
 	private MemberService memberService;
 	
+	@PostMapping("/api/member/login")
+	public Map<String,Object> checkLogin(@RequestBody MemberDTO memberDTO) {
+		Map<String, Object> mapJson = new HashMap<>();
+		String ur_id = memberDTO.getUr_id();
+		String ur_pass = memberDTO.getUr_passwd();
+		
+		boolean isMatched = memberService.checkMemberId(ur_id, ur_pass);
+		if(!isMatched) {
+			mapJson.put("result", "fail");
+			mapJson.put("message", "ID or passwd가 틀렸습니다");
+		} else {
+			mapJson.put("result", "success");
+			mapJson.put("redirectUrl","/board/main");
+		}
+		return mapJson;
+	}
+	
 	@GetMapping("/api/member/duplication")
-	public Map<String, Object> checkLogin(@RequestParam String ur_id) {
+	public Map<String, Object> checkIdDuplication(@RequestParam String ur_id) {
 		Map<String, Object> mapJson = new HashMap<>();
 		boolean isDuplicated = memberService.checkMemberIdDupl(ur_id);
 		if(isDuplicated) {
@@ -31,8 +48,6 @@ public class MemberRestController {
 		}
 		return mapJson;
 	}
-	
-	
 	
 	@PostMapping("/api/member/register")
 	public Map<String,Object> registerMember(@RequestBody MemberDTO memberDTO) {
