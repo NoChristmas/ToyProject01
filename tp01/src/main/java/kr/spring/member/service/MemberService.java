@@ -12,4 +12,11 @@ public interface MemberService {
 	
 	//회원가입 및 정보 수정
 	public boolean upsertMember(MemberDTO memberDTO);
+	
+	//회원 정보 가져오기
+	public MemberDTO getMember(String ur_id);
+	
+	//토큰 정보 만들기
+	public String createToken(String ur_id);
+	
 }

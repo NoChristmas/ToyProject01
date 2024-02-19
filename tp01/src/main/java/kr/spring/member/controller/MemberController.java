@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.dto.MemberDTO;
 
@@ -38,6 +40,13 @@ public class MemberController {
 		return "member/register";
 	}
 	
-	
+	@GetMapping("/member/logout")
+	public String memberLogout(HttpServletResponse response) {
+		Cookie tokenCookie = new Cookie("token", "");
+		tokenCookie.setMaxAge(0);
+		tokenCookie.setPath("/");
+		response.addCookie(tokenCookie);
+		return "redirect:/";
+	}
 	
 }

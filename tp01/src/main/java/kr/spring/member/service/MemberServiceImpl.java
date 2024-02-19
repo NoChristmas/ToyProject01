@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.dto.MemberDTO;
+import kr.spring.security.CookieService;
+import kr.spring.security.JwtProvider;
 
 @Service
 @Transactional
@@ -17,7 +19,10 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-		
+	
+	@Autowired
+	private JwtProvider jwtProvider;
+	
 	//id 중복 여부
 	@Override
 	public boolean checkMemberIdDupl(String ur_id) {
@@ -25,12 +30,11 @@ public class MemberServiceImpl implements MemberService {
 		return howManyMembers >=1;
 	};
 		
-	//로그인 여부
+	//ID and Passwd Check
 	@Override
 	public boolean checkMemberId(String ur_id, String ur_passwd) {
 		if(checkMemberIdDupl(ur_id)) {
 			if(passwordEncoder.matches(ur_passwd,memberMapper.getMemberPassword(ur_id))) {
-				System.out.println("패스워드 매칭 됨");
 				return true;
 			}
 		}
@@ -52,5 +56,25 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.insertMember(memberDTO);
 		return true;
 	};
+	
+	
+	@Override
+	public MemberDTO getMember(String ur_id) {
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO = memberMapper.getMemberInfo(ur_id);
+		if(memberDTO == null) {
+			return null;
+		}
+		return memberDTO;
+	}
+	
+	@Override
+	public String createToken(String ur_id) {
+		MemberDTO memberDTO = null; 
+		memberDTO = getMember(ur_id);
+		int ur_no = memberDTO.getUr_no();
+		String ur_name = memberDTO.getUr_name();
+		return jwtProvider.createToken(ur_no, ur_id, ur_name);
+	}
 	
 }

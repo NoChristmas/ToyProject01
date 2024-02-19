@@ -80,6 +80,7 @@ a:hover {
 	<!-- 게시판 목록  -->
 	<h2>메인 게시판</h2>
 	<a href="${pageContext.request.contextPath}/board/write">글 쓰기</a>
+	<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
 	<!-- js에서 가져오는 값들 -->
 	<div id="board_contents"></div>
 	<div class="paging-box">

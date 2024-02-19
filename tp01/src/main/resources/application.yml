@@ -17,7 +17,7 @@ spring:
       enabled: true
     restart: #컨트롤러, 모델단이 바뀌었을 때 프로젝트 재시작 설정(정확히는 classpath에 있는 모든 파일)
       enabled: true 
-  
+
   servlet:
     multipart:
       max-file-size: 50MB #파일 한 개당 최대 사이즈

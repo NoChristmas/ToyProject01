@@ -25,5 +25,8 @@ public interface MemberMapper {
 	@Select("SELECT COUNT(*) ur_id FROM TP01MEMBER WHERE ur_id = #{ur_id} AND ur_pass = #{ur_passwd}")
 	public int countMemberLogin(String ur_id, String ur_passwd);
 	
+	//멤버 정보 가져오기
+	@Select("SELECT ur_no, ur_id, ur_name FROM TP01MEMBER WHERE ur_id = #{ur_id}")
+	public MemberDTO getMemberInfo(String ur_id);
 	
 }

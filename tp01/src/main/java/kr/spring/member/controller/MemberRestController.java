@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpServletResponse;
 import kr.spring.member.dto.MemberDTO;
 import kr.spring.member.service.MemberService;
+import kr.spring.security.CookieService;
 
 @RestController
 public class MemberRestController {
@@ -19,8 +21,18 @@ public class MemberRestController {
 	@Autowired 
 	private MemberService memberService;
 	
+	@Autowired
+	private CookieService cookieService;
+	
+	@GetMapping("/api/token-temp")
+	public Map<String,Object> getTempToken() {
+		Map<String,Object> mapJson = new HashMap<>();
+		return mapJson;
+	}
+	
 	@PostMapping("/api/member/login")
-	public Map<String,Object> checkLogin(@RequestBody MemberDTO memberDTO) {
+	public Map<String,Object> checkLogin(
+			@RequestBody MemberDTO memberDTO, HttpServletResponse response) {
 		Map<String, Object> mapJson = new HashMap<>();
 		String ur_id = memberDTO.getUr_id();
 		String ur_pass = memberDTO.getUr_passwd();
@@ -29,11 +41,15 @@ public class MemberRestController {
 		if(!isMatched) {
 			mapJson.put("result", "fail");
 			mapJson.put("message", "ID or passwd가 틀렸습니다");
-		} else {
-			mapJson.put("result", "success");
-			mapJson.put("redirectUrl","/board/main");
+			return mapJson;
 		}
+		
+		String token = memberService.createToken(ur_id);
+		cookieService.addCookie(response, "token", token);
+		mapJson.put("result", "success");
+		mapJson.put("redirectUrl","/board/main");
 		return mapJson;
+		
 	}
 	
 	@GetMapping("/api/member/duplication")
@@ -62,4 +78,5 @@ public class MemberRestController {
 		}
 		return mapJson;
 	}
+	
 }

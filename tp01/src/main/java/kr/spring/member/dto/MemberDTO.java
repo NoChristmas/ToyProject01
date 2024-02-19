@@ -20,6 +20,7 @@ public class MemberDTO {
         this.ur_email = null; 
         this.ur_birth_date = null;
         this.ur_reg_date = null;
+        
     }
 
     // 매개변수를 받는 생성자
