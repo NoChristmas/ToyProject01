@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.spring.member.dto.MemberDTO;
 import kr.spring.member.service.MemberService;
@@ -26,9 +27,11 @@ public class MemberRestController {
 	private CookieService cookieService;
 	
 	@GetMapping("/api/token-temp")
-	public Map<String,Object> getTempToken(@RequestHeader(name="Authorization") String Header) {
+	public Map<String,Object> getTempToken(
+			//@RequestHeader(name="Authorization") String Header, 
+			HttpServletRequest request) {
 		Map<String,Object> mapJson = new HashMap<>();
-		
+		mapJson.put("result", "success");
 		return mapJson;
 	}
 	
@@ -47,7 +50,7 @@ public class MemberRestController {
 		}
 		
 		String token = memberService.createToken(ur_id);
-		cookieService.addCookie(response, "token", token);
+		cookieService.addCookie(response,"token",token);
 		mapJson.put("result", "success");
 		mapJson.put("redirectUrl","/board/main");
 		return mapJson;

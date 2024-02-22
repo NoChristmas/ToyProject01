@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import jakarta.servlet.DispatcherType;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -22,23 +24,32 @@ public class SecurityConfig {
 	JwtProvider jwtProvider;
 	
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        
-		//폼기반 로그인 비활성화
-		http.formLogin((login)->login.disable());
-		// HTTP 기본 인증 비활성화
-		http.httpBasic((basic)->basic.disable());
-		// CSRF 공격 방어 기능 비활성화
-		http.csrf((csrf) -> csrf.disable());
-		//세션 인증 끄기
-		http.sessionManagement((management)->management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
-		//http.addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
+		http
+			.formLogin().disable()
+			.csrf().disable()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            
+            .and()
+            .authorizeHttpRequests()
+            .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+			.requestMatchers("/lib/**").permitAll()
+            .requestMatchers("/api/member/**").permitAll()
+			.requestMatchers("/member/**").permitAll()
+			.requestMatchers("/").permitAll()
+            .anyRequest().authenticated() // white list 기반
+			
+            .and()
+            .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
+		
+		
         return http.build();
     }
     

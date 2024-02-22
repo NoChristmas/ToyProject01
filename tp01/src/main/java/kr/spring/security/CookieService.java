@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Service
@@ -11,8 +12,8 @@ public class CookieService {
 	public void addCookie(HttpServletResponse response, String key, String value) {
         Cookie cookie = new Cookie(key, value);
 
-        //1시간
-        int maxAgeInSeconds = 60 * 60;
+        //30분
+        int maxAgeInSeconds = 60 * 60 * 2;
         cookie.setMaxAge(maxAgeInSeconds);
 
         // 쿠키의 유효 경로 설정 (선택 사항)
@@ -29,4 +30,16 @@ public class CookieService {
         response.addCookie(cookie);
     }
 	
+	public String getCookie(HttpServletRequest request, String key) {
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(key.equals(cookie.getName())) {
+					System.out.println("cookie값 들어옴");
+					return cookie.getValue();
+				}
+			}
+		}
+		return "";
+	}
 }
