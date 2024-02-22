@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +26,9 @@ public class MemberRestController {
 	private CookieService cookieService;
 	
 	@GetMapping("/api/token-temp")
-	public Map<String,Object> getTempToken() {
+	public Map<String,Object> getTempToken(@RequestHeader(name="Authorization") String Header) {
 		Map<String,Object> mapJson = new HashMap<>();
+		
 		return mapJson;
 	}
 	

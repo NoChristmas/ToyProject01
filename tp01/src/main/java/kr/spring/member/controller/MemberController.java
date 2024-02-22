@@ -19,7 +19,7 @@ public class MemberController {
 	*/
 	@ModelAttribute
 	public MemberDTO initCommand() {
-		return  new MemberDTO();
+		return new MemberDTO();
 	}
 	
 	
