@@ -34,4 +34,4 @@
 
 
 
-###Detial 설명
+##To-Do (코드 설명, ERD, JWT 설명, Filter 설명)
