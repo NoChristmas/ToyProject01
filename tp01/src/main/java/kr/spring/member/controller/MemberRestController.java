@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.spring.member.dto.MemberDTO;
+import kr.spring.member.service.CookieService;
 import kr.spring.member.service.MemberService;
-import kr.spring.security.CookieService;
 
 @RestController
 public class MemberRestController {

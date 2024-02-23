@@ -26,4 +26,9 @@ public class BoardController {
 		return "board/write";
 	}
 	
+	@GetMapping("/board/modify")
+	public String getModifyPage() {
+		return "board/modify";
+	}
+	
 }

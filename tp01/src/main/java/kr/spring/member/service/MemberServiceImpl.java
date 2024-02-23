@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.dto.MemberDTO;
-import kr.spring.security.CookieService;
 import kr.spring.security.JwtProvider;
 
 @Service

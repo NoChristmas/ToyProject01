@@ -15,6 +15,9 @@
         <div class="card-header">
             <h2>게시글</h2>
         </div>
+        <button id="modify_btn">글 수정</button>
+        <button id="main_btn">뒤로가기</button>
+        <button id="delete_btn">글 삭제</button>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
@@ -42,8 +45,6 @@
 		</div>
     </div>
 </div>
-
-<!-- Bootstrap JS and dependencies -->
 <script src="${pageContext.request.contextPath}/lib/jquery/jquery-3.7.1.min.js"></script>
 <script>
 $(function(){
@@ -68,6 +69,35 @@ $(function(){
             alert('등록 실패');
         }
     });
+	
+	$('#modify_btn').click(function(){
+		window.location.href = "${pageContext.request.contextPath}/board/modify?bd_no=" + bd_no;
+	});
+	
+	$('#main_btn').click(function(){
+		window.location.href="${pageContext.request.contextPath}/board/main";
+	});
+	
+	$('#delete_btn').click(function(){
+		$.ajax({
+	        type: "DELETE",
+	        url: "${pageContext.request.contextPath}/api/board/"+bd_no,
+	        dataType: "json", // 응답의 데이터 타입
+	        success: function (response) {
+	            if(response.result == 'success') {
+	            	alert(response.message);
+	            	window.location.href = response.redirectUrl;
+	            } else {
+	            	alert(response.message);
+	            	window.location.href = response.redirectUrl;
+	            }
+	        },
+	        error: function () {
+	            alert('네트워크 오류');
+	        }
+	    });
+	});
+	
 });
 </script>
 </body>

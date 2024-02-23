@@ -1,4 +1,4 @@
-package kr.spring.security;
+package kr.spring.member.service;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class CookieService {
 	public void addCookie(HttpServletResponse response, String key, String value) {
         Cookie cookie = new Cookie(key, value);
 
-        //30분
+        //120분
         int maxAgeInSeconds = 60 * 60 * 2;
         cookie.setMaxAge(maxAgeInSeconds);
 
@@ -35,11 +35,17 @@ public class CookieService {
 		if(cookies != null) {
 			for(Cookie cookie : cookies) {
 				if(key.equals(cookie.getName())) {
-					System.out.println("cookie값 들어옴");
 					return cookie.getValue();
 				}
 			}
 		}
 		return "";
 	}
+	
+	public void deleteCookie(HttpServletResponse response, String key) {
+        Cookie tokenCookie = new Cookie(key, "");
+        tokenCookie.setMaxAge(0);
+        tokenCookie.setPath("/");
+        response.addCookie(tokenCookie);
+    }
 }

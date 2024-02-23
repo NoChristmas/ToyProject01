@@ -15,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import jakarta.servlet.DispatcherType;
+import kr.spring.member.service.CookieService;
 
 @Configuration
 @EnableWebSecurity
@@ -29,7 +30,8 @@ public class SecurityConfig {
 	}
 	
 	@Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http
+    		,JwtProvider jwtProvider, CookieService cookieService) throws Exception {
 		
 		http
 			.formLogin().disable()
@@ -40,14 +42,14 @@ public class SecurityConfig {
             .and()
             .authorizeHttpRequests()
             .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-			.requestMatchers("/lib/**").permitAll()
             .requestMatchers("/api/member/**").permitAll()
+            .requestMatchers("/lib/**").permitAll()
 			.requestMatchers("/member/**").permitAll()
 			.requestMatchers("/").permitAll()
             .anyRequest().authenticated() // white list 기반
 			
             .and()
-            .addFilterBefore(new JwtFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(new JwtFilter(jwtProvider, cookieService), UsernamePasswordAuthenticationFilter.class);
 		
 		
         return http.build();

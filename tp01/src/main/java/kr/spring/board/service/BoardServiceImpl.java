@@ -16,7 +16,7 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper boardMapper;
 	
-	//게시판 개수 가져오기
+	//게시판 전체 개수 가져오기
 	@Override
 	public int getBoardCount() {
 		int cnt = boardMapper.getBoardCount();
@@ -36,5 +36,39 @@ public class BoardServiceImpl implements BoardService {
 		List<BoardDTO> list = boardMapper.getBoard(bd_no);
 		return list;
 	}
+	
+	@Override
+	public boolean upsertBoard(BoardDTO boardDTO) {
+		List<BoardDTO> list = getBoard(boardDTO.getBd_no());
+		if(!list.isEmpty()) { //있는 게시글인지 확인
+			boardMapper.updateBoard(boardDTO);
+			return true;
+		}
+		boardMapper.insertBoard(boardDTO);
+		return true;
+	}
+	
+	@Override
+	public boolean deleteBoard(BoardDTO boardDTO) {
+		List<BoardDTO> list = getBoard(boardDTO.getBd_no());
+		if(!list.isEmpty()) { //있는 게시글인지 확인
+			boardMapper.deleteBoard(boardDTO);
+			return true;
+		}
+		return false;
+	}
+	
+	//게시판 조회수 가져오기
+	@Override
+	public int getCurrentBoardHit(int bd_no) {
+		int hit = boardMapper.selectBoardHit(bd_no);
+		return hit;
+	}
 		
+	//게시판 조회수 올리기
+	@Override
+	public boolean upHit(BoardDTO boardDTO) {
+		boardMapper.updateBoardHit(boardDTO);
+		return true;
+	}
 }

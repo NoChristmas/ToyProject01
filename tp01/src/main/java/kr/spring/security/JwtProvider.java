@@ -1,8 +1,11 @@
 package kr.spring.security;
 
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -12,6 +15,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import kr.spring.member.dto.MemberDTO;
+import kr.spring.member.dto.MemberDetails;
 
 @Component
 public class JwtProvider {
@@ -55,6 +60,19 @@ public class JwtProvider {
         Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
         return claims;
     }
+    
+    public Authentication getAuthentication(String token) {
+    	Claims claims = getInformation(token);
+    	
+    	int ur_no = (int) claims.get("ur_no");
+    	String ur_id = (String) claims.get("ur_id");
+    	String ur_name = (String) claims.get("ur_name");
+    	
+    	MemberDTO memberDTO = new MemberDTO(ur_no, ur_id, null, ur_name, null, null, null);
+        MemberDetails userDetails = new MemberDetails(memberDTO);
+    	return new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+    }
+    
     
     // cookie 값에서 가져올 때
     public String resolveToken(HttpServletRequest request) {
