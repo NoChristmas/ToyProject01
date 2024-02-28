@@ -44,4 +44,8 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
+	@GetMapping("/thymeleaf/main.do")
+	public String getMainPage() {
+		return "thymeleaf/main";
+	}
 }

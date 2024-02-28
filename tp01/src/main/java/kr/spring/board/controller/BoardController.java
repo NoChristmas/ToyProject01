@@ -31,4 +31,8 @@ public class BoardController {
 		return "board/modify";
 	}
 	
+	@GetMapping("/board/test")
+	public String getBoardTestPage() {
+		return "board/test";
+	}
 }
