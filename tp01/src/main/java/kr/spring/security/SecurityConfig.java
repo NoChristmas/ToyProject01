@@ -46,7 +46,6 @@ public class SecurityConfig {
             .requestMatchers("/lib/**").permitAll()
 			.requestMatchers("/member/**").permitAll()
 			.requestMatchers("/").permitAll()
-						
 			.requestMatchers("/thymeleaf/main.do").permitAll() //thymeleaf 임시 해제
             .anyRequest().authenticated() // white list 기반
 			

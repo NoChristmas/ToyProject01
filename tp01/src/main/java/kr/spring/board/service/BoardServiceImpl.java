@@ -3,18 +3,21 @@ package kr.spring.board.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.board.dao.BoardMapper;
 import kr.spring.board.dto.BoardDTO;
+import kr.spring.board.repository.BoardRepository;
 
 @Service
 @Transactional
 public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
-	private BoardMapper boardMapper;
+	@Qualifier("oracle")
+	private BoardRepository boardMapper;
 	
 	//게시판 전체 개수 가져오기
 	@Override

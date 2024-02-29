@@ -6,6 +6,7 @@ spring:
     view: #view 경로 및 확장자 지정
       prefix: /WEB-INF/views/
       suffix: .jsp 
+  
   thymeleaf:
     prefix: classpath:/templates/    # Thymeleaf html 파일이 위치할 기본 위치 설정
     suffix: .html   # Thymeleaf html 확장자 설정
@@ -28,9 +29,9 @@ spring:
       max-request-size: 200MB #요청당 최대 파일 크기
           
 mybatis: #mybatis 설정
-  type-aliases-package: kr.spring.**.dto
+  type-aliases-package: kr.spring.**.repository
   mapper-locations: kr/spring/**/dao/*.xml
-  
+ 
 logging: #로그 지정
   level:
     '[kr.spring]': debug

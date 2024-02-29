@@ -1,12 +1,14 @@
 package kr.spring.member.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.dto.MemberDTO;
+import kr.spring.member.repository.MemberRepository;
 import kr.spring.security.JwtProvider;
 
 @Service
@@ -14,7 +16,8 @@ import kr.spring.security.JwtProvider;
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
-	private MemberMapper memberMapper;
+	@Qualifier("oracle")
+	private MemberRepository memberMapper;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
