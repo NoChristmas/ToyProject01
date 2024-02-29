@@ -16,7 +16,7 @@ import kr.spring.security.JwtProvider;
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
-	@Qualifier("oracle")
+	@Qualifier("oracle") //식별자 추가
 	private MemberRepository memberMapper;
 	
 	@Autowired
