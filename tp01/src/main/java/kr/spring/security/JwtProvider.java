@@ -1,6 +1,5 @@
 package kr.spring.security;
 
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 
@@ -61,6 +60,7 @@ public class JwtProvider {
         return claims;
     }
     
+    //Filter에서 처리할 예정
     public Authentication getAuthentication(String token) {
     	Claims claims = getInformation(token);
     	
