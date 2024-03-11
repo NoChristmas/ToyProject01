@@ -1,6 +1,6 @@
 package kr.spring.member.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,83 +15,83 @@ public class MemberEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ur_no;
-    
-    @Column
-    private String ur_id;
+    @Column(name = "ur_no")
+    private int urNo;
 
-    @Column
-    private String ur_passwd;
+    @Column(name = "ur_id")
+    private String urId;
 
-    @Column
-    private String ur_name;
+    @Column(name = "ur_passwd")
+    private String urPasswd;
 
-    @Column
-    private String ur_email;
+    @Column(name = "ur_name")
+    private String urName;
 
-    @Column
-    private Date ur_birth_date;
+    @Column(name = "ur_email")
+    private String urEmail;
 
-    @Column
-    private Date ur_reg_date;
+    @Column(name = "ur_birth_date")
+    private Date urBirthDate;
+
+    @Column(name = "ur_reg_date")
+    private Date urRegDate;
 
     public MemberEntity() {
     }
 
-    // Getter와 Setter는 필요에 따라 추가
-    public int getUr_no() {
-        return ur_no;
+    public int getUrNo() {
+        return urNo;
     }
 
-    public void setUr_no(int ur_no) {
-        this.ur_no = ur_no;
+    public void setUrNo(int urNo) {
+        this.urNo = urNo;
     }
 
-    public String getUr_id() {
-        return ur_id;
+    public String getUrId() {
+        return urId;
     }
 
-    public void setUr_id(String ur_id) {
-        this.ur_id = ur_id;
+    public void setUrId(String urId) {
+        this.urId = urId;
     }
 
-    public String getUr_passwd() {
-        return ur_passwd;
+    public String getUrPasswd() {
+        return urPasswd;
     }
 
-    public void setUr_passwd(String ur_passwd) {
-        this.ur_passwd = ur_passwd;
+    public void setUrPasswd(String urPasswd) {
+        this.urPasswd = urPasswd;
     }
 
-    public String getUr_name() {
-        return ur_name;
+    public String getUrName() {
+        return urName;
     }
 
-    public void setUr_name(String ur_name) {
-        this.ur_name = ur_name;
+    public void setUrName(String urName) {
+        this.urName = urName;
     }
 
-    public String getUr_email() {
-        return ur_email;
+    public String getUrEmail() {
+        return urEmail;
     }
 
-    public void setUr_email(String ur_email) {
-        this.ur_email = ur_email;
+    public void setUrEmail(String urEmail) {
+        this.urEmail = urEmail;
     }
 
-    public Date getUr_birth_date() {
-        return ur_birth_date;
+    public Date getUrBirthDate() {
+        return urBirthDate;
     }
 
-    public void setUr_birth_date(Date ur_birth_date) {
-        this.ur_birth_date = ur_birth_date;
+    public void setUrBirthDate(Date urBirthDate) {
+        this.urBirthDate = urBirthDate;
     }
 
-    public Date getUr_reg_date() {
-        return ur_reg_date;
+    public Date getUrRegDate() {
+        return urRegDate;
     }
 
-    public void setUr_reg_date(Date ur_reg_date) {
-        this.ur_reg_date = ur_reg_date;
+    public void setUrRegDate(Date urRegDate) {
+        this.urRegDate = urRegDate;
     }
 }

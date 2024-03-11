@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.spring.member.dto.MemberDTO;
 import kr.spring.member.service.CookieService;
+import kr.spring.member.service.MemberServiceBackup;
 import kr.spring.member.service.MemberService;
 
 @RestController
@@ -41,20 +42,17 @@ public class MemberRestController {
 		Map<String, Object> mapJson = new HashMap<>();
 		String ur_id = memberDTO.getUr_id();
 		String ur_pass = memberDTO.getUr_passwd();
-		
 		boolean isMatched = memberService.checkMemberId(ur_id, ur_pass);
 		if(!isMatched) {
 			mapJson.put("result", "fail");
 			mapJson.put("message", "ID or passwd가 틀렸습니다");
 			return mapJson;
 		}
-		
 		String token = memberService.createToken(ur_id);
 		cookieService.addCookie(response,"token",token);
 		mapJson.put("result", "success");
 		mapJson.put("redirectUrl","/board/main");
 		return mapJson;
-		
 	}
 	
 	@GetMapping("/api/member/duplication")

@@ -13,7 +13,7 @@ import kr.spring.security.JwtProvider;
 
 @Service
 @Transactional
-public class MemberServiceImpl implements MemberService {
+public class MemberServiceImplBackup implements MemberServiceBackup {
 	
 	@Autowired
 	private MemberMapper memberMapper;

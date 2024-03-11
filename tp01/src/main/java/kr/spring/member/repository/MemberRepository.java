@@ -1,34 +1,16 @@
 package kr.spring.member.repository;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import kr.spring.member.dto.MemberDTO;
+import kr.spring.member.entity.MemberEntity;
 
 @Repository
-@Mapper
-public interface MemberRepository {
-	// 회원가입 진행
-	@Insert("INSERT INTO TP01MEMBER (ur_id,ur_passwd,ur_name,ur_email,ur_birth_date) VALUES (#{ur_id},#{ur_passwd},#{ur_name},#{ur_email},#{ur_birth_date})")
-	public void insertMember(MemberDTO memberDTO);
-
-	// pw 가져오기
-	@Select("SELECT ur_passwd FROM TP01MEMBER WHERE ur_id = #{ur_id}")
-	public String getMemberPassword(String ur_id);
-
-	// id
-	@Select("SELECT COUNT(*) ur_id FROM TP01MEMBER WHERE ur_id = #{ur_id}")
-	public int countMemberIdDupl(String ur_id);
-
-	// id and pw 확인
-	@Select("SELECT COUNT(*) ur_id FROM TP01MEMBER WHERE ur_id = #{ur_id} AND ur_pass = #{ur_passwd}")
-	public int countMemberLogin(String ur_id, String ur_passwd);
-
-	// 멤버 정보 가져오기
-	@Select("SELECT ur_no, ur_id, ur_name FROM TP01MEMBER WHERE ur_id = #{ur_id}")
-	public MemberDTO getMemberInfo(String ur_id);
-
+public interface MemberRepository extends JpaRepository<MemberEntity, Integer> {
+	
+	public int countByUrId(String ur_id);
+	
+	public MemberEntity findByUrId(String ur_id);
+	
+	
 }
