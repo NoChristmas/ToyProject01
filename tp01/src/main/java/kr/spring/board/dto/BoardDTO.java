@@ -22,7 +22,7 @@ public class BoardDTO {
         this.bd_type = null;
         this.bd_auth = 4;
         this.bd_hit = 0;
-        this.bd_reg_date = null;
+        this.bd_reg_date = new java.sql.Date(System.currentTimeMillis());
     }
 
     public BoardDTO(int bd_no, int ur_no, String ur_name,String bd_name,String bd_info, String bd_type, int bd_auth, int bd_hit, Date bd_reg_date) {
@@ -123,5 +123,28 @@ public class BoardDTO {
                 ", bd_hit=" + bd_hit +
                 ", bd_reg_date=" + bd_reg_date +
                 '}';
+    }
+    
+    //array 형태로 받아서 값을 설정하자
+    public static BoardDTO fromArray(Object[] values) {
+        if (values.length >= 9) {
+        	return new BoardDTO(
+        		(int) values[0],
+                (int) values[1],
+                (String) values[2],
+                (String) values[3],
+                (String) values[4],
+                (String) values[5],
+                (int) values[6],
+                (int) values[7],
+                (Date) values[8]
+        	);
+        }
+        return null;
+    }
+    
+    // 객체의 값을 배열로 반환하는 메서드
+    public Object[] toArray() {
+        return new Object[]{bd_no, ur_no, ur_name, bd_name, bd_info, bd_type, bd_auth, bd_hit, bd_reg_date};
     }
 }

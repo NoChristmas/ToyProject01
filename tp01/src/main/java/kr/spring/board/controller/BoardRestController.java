@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletResponse;
 import kr.spring.board.dto.BoardDTO;
+import kr.spring.board.service.BoardServiceBackup;
 import kr.spring.board.service.BoardService;
 import kr.spring.member.dto.MemberDTO;
 import kr.spring.member.dto.MemberDetails;

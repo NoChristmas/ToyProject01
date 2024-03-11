@@ -2,6 +2,7 @@ package kr.spring.member.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,17 +16,23 @@ public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ur_no;
-
+    
+    @Column
     private String ur_id;
 
+    @Column
     private String ur_passwd;
 
+    @Column
     private String ur_name;
 
+    @Column
     private String ur_email;
 
+    @Column
     private Date ur_birth_date;
 
+    @Column
     private Date ur_reg_date;
 
     public MemberEntity() {

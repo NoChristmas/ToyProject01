@@ -13,11 +13,10 @@ import kr.spring.board.repository.BoardRepository;
 
 @Service
 @Transactional
-public class BoardServiceImpl implements BoardService {
+public class BoardServiceImplBackup implements BoardServiceBackup {
 	
 	@Autowired
-	@Qualifier("oracle")
-	private BoardRepository boardMapper;
+	private BoardMapper boardMapper;
 	
 	//게시판 전체 개수 가져오기
 	@Override

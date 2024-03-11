@@ -1,7 +1,10 @@
 package kr.spring.board.entity;
 
 import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,23 +21,29 @@ public class BoardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bd_no;
-
-    @ManyToOne
-    @JoinColumn(name = "ur_no")
-    private MemberEntity member;
-
+    
+    @Column
+    private int ur_no;
+    
+    @Column
     private String ur_name;
-
+    
+    @Column
     private String bd_name;
-
+    
+    @Column
     private String bd_info;
-
+    
+    @Column
     private String bd_type;
-
+    
+    @Column
     private int bd_auth = 4;
-
+    
+    @Column
     private int bd_hit = 0;
-
+    
+    @Column
     private Date bd_reg_date;
 
     public BoardEntity() {
@@ -49,12 +58,12 @@ public class BoardEntity {
         this.bd_no = bd_no;
     }
 
-    public MemberEntity getMember() {
-        return member;
+    public int getUr_no() {
+        return ur_no;
     }
 
-    public void setMember(MemberEntity member) {
-        this.member = member;
+    public void setUr_no(int ur_no) {
+        this.ur_no = ur_no;
     }
 
     public String getUr_name() {
@@ -111,5 +120,9 @@ public class BoardEntity {
 
     public void setBd_reg_date(Date bd_reg_date) {
         this.bd_reg_date = bd_reg_date;
+    }
+    
+    public List<Object> toList() {
+    	return Arrays.asList(bd_no, ur_no, ur_name, bd_name, bd_info, bd_type, bd_auth, bd_hit, bd_reg_date);
     }
 }

@@ -10,7 +10,6 @@ import kr.spring.member.dto.MemberDTO;
 
 @Repository
 @Mapper
-@Qualifier("oracle")
 public interface MemberRepository {
 	// 회원가입 진행
 	@Insert("INSERT INTO TP01MEMBER (ur_id,ur_passwd,ur_name,ur_email,ur_birth_date) VALUES (#{ur_id},#{ur_passwd},#{ur_name},#{ur_email},#{ur_birth_date})")
