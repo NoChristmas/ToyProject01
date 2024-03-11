@@ -5,10 +5,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import kr.spring.jwt.JwtProvider;
 import kr.spring.member.dto.MemberDTO;
 import kr.spring.member.entity.MemberEntity;
 import kr.spring.member.repository.MemberRepository;
-import kr.spring.security.JwtProvider;
 import kr.spring.util.MemberConverter;
 
 @Service

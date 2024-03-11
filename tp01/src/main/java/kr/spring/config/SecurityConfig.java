@@ -1,4 +1,4 @@
-package kr.spring.security;
+package kr.spring.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import jakarta.servlet.DispatcherType;
+import kr.spring.jwt.JwtFilter;
+import kr.spring.jwt.JwtProvider;
 import kr.spring.member.service.CookieService;
 
 @Configuration

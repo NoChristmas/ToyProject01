@@ -21,8 +21,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 		entityManagerFactoryRef = "primaryEntityManager",
 		transactionManagerRef = "primaryTransactionManager"
 )
-
-public class PrimaryConfig { //oraclexe
+public class OracleXE11gConfig {
 	@Bean
 	@Primary
 	@ConfigurationProperties(prefix = "spring.datasource.hikari")

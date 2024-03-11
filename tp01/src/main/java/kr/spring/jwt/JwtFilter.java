@@ -1,4 +1,4 @@
-package kr.spring.security;
+package kr.spring.jwt;
 
 import java.io.IOException;
 

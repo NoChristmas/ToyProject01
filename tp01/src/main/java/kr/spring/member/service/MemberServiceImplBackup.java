@@ -6,10 +6,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.jwt.JwtProvider;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.dto.MemberDTO;
 import kr.spring.member.repository.MemberRepository;
-import kr.spring.security.JwtProvider;
 
 @Service
 @Transactional

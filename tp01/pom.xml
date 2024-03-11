@@ -105,6 +105,7 @@
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+		<!-- JPA를 위한 설정 -->
 		<dependency>
     		<groupId>jakarta.persistence</groupId>
     		<artifactId>jakarta.persistence-api</artifactId>
