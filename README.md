@@ -5,7 +5,7 @@
 - REST API를 이용한 데이터 통신
 - Spring Security를 활용한 JWT(JSON Web Tokens) 인증 방식 구현
 
-##Version
+## Version
 - JDK 17
 - SpringBoot 3.2.X
 - mybatis 3.X
@@ -29,4 +29,4 @@
 3. **게시판 접근**: JWT Filter를 통해 토큰 확인, 토큰 없을 시 Spring Security에서 접근 거부
 4. **게시판 CRUD**: 로그인 상태에서 게시물 작성, 조회, 수정, 삭제 가능
 
-##To-Do (코드 설명, ERD, JWT 설명, Filter 설명)
+## 블로그 : https://velog.io/@nochristmas/posts
