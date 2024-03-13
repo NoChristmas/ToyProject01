@@ -87,4 +87,9 @@ public class JwtProvider {
         return null;
     	//return request.getHeader("X-AUTH-TOKEN");
     }
-}
+    
+    public String getUrId(String jwtToken) {
+    	Claims claims = getInformation(jwtToken);
+    	return (String) claims.get("ur_id");
+    }
+ }

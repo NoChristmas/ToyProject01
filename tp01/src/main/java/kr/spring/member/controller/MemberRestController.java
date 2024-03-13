@@ -82,6 +82,9 @@ public class MemberRestController {
 		if(isSuccess) {
 			mapJson.put("result","success");
 			mapJson.put("redirectUrl","/member/login");
+			if(memberLogService.createMemberRegisterLog(memberDTO)) {
+				mapJson.put("log", "success");
+			}
 		} else {
 			mapJson.put("result", "fail");
 			mapJson.put("message", "fail To Upload");

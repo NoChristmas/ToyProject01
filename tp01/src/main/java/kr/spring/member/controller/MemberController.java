@@ -7,10 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.spring.jwt.JwtProvider;
+import kr.spring.log.service.MemberLogService;
 import kr.spring.member.service.CookieService;
 
 @Controller
 public class MemberController {
+	
+	@Autowired
+	MemberLogService memberLogService;
 	
 	private final CookieService cookieService;
 	
@@ -39,8 +44,13 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/logout")
-	public String memberLogout(HttpServletResponse response) {
+	public String memberLogout(HttpServletRequest request, HttpServletResponse response) {
+		String token = cookieService.getCookie(request,"token");
 		cookieService.deleteCookie(response,"token");
+		JwtProvider jwtProvider = new JwtProvider();
+		String ur_id = jwtProvider.getUrId(token);
+		//멤버 로그아웃 토큰으로 받기
+		memberLogService.createMemberLogoutLog(ur_id);
 		return "redirect:/member/login";
 	}
 	

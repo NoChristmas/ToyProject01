@@ -12,6 +12,9 @@ public class MemberLogEntity {
 	@Id
 	private String id;
 
+	@Field(name = "ur_id")
+	private String urId;
+	
 	@Field(name = "type")
 	private String type;
 
@@ -26,6 +29,10 @@ public class MemberLogEntity {
 		return id;
 	}
 
+	public String getUrId() {
+		return urId;
+	}
+	
 	public String getType() {
 		return type;
 	}
@@ -43,6 +50,10 @@ public class MemberLogEntity {
 		this.id = id;
 	}
 
+	public void setUrId(String urId) {
+		this.urId = urId;
+	}
+	
 	public void setType(String type) {
 		this.type = type;
 	}

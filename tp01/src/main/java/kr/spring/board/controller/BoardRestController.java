@@ -36,9 +36,9 @@ public class BoardRestController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null && authentication.getPrincipal() instanceof MemberDetails) {
 			MemberDetails userDetails = (MemberDetails) authentication.getPrincipal();
-			ur_no = userDetails.getUr_no();
-			ur_id = userDetails.getUsername();
-			ur_name = userDetails.getUr_name();
+			this.ur_no = userDetails.getUr_no();
+			this.ur_id = userDetails.getUsername();
+			this.ur_name = userDetails.getUr_name();
 		} else {
 			response.sendRedirect("/member/login");
 		}
