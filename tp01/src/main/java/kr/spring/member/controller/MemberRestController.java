@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.spring.log.service.MemberLogService;
 import kr.spring.member.dto.MemberDTO;
 import kr.spring.member.service.CookieService;
 import kr.spring.member.service.MemberServiceBackup;
@@ -20,6 +21,9 @@ import kr.spring.member.service.MemberService;
 
 @RestController
 public class MemberRestController {
+	
+	@Autowired
+	private MemberLogService memberLogService;
 	
 	@Autowired 
 	private MemberService memberService;
@@ -50,6 +54,9 @@ public class MemberRestController {
 		}
 		String token = memberService.createToken(ur_id);
 		cookieService.addCookie(response,"token",token);
+		if(memberLogService.createMemberLoginLog(memberDTO)) {
+			mapJson.put("log", "success");
+		}
 		mapJson.put("result", "success");
 		mapJson.put("redirectUrl","/board/main");
 		return mapJson;

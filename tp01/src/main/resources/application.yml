@@ -11,6 +11,8 @@ spring:
     prefix: classpath:/templates/    # Thymeleaf html 파일이 위치할 기본 위치 설정
     suffix: .html   # Thymeleaf html 확장자 설정
     view-names: thymeleaf/*
+
+
 #  datasource:
 #    url: jdbc:oracle:thin:@localhost:1521:xe
 #    username: c##user001
@@ -21,7 +23,10 @@ spring:
       jdbc-url: jdbc:oracle:thin:@localhost:1521:xe
       username: c##user001
       password: 1234
-
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+ 
   devtools: #View reload
     livereload:
       enabled: true
