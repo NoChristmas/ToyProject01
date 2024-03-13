@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "users")
-public class MemberLogEntity {
+public class LogEntity {
 
 	@Id
 	private String id;
