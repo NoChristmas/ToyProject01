@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.spring.board.dto.BoardDTO;
 import kr.spring.board.service.BoardServiceBackup;
+import kr.spring.log.service.BoardLogService;
 import kr.spring.board.service.BoardService;
 import kr.spring.member.dto.MemberDTO;
 import kr.spring.member.dto.MemberDetails;
@@ -46,7 +47,10 @@ public class BoardRestController {
 
 	@Autowired
 	private BoardService boardService;
-
+	
+	@Autowired
+	private BoardLogService boardLogService;
+	
 	// 게시판 개수 가져오기
 	@GetMapping("/api/board/countBoard")
 	public int getCountBoard() {
@@ -68,6 +72,9 @@ public class BoardRestController {
 			boardDTO.setBd_hit(increasedHit);
 			boardDTO.setBd_no(bd_no);
 			boardService.upHit(boardDTO);
+			if(boardLogService.createBoardClickLog(boardDTO, ur_id)) {
+				mapJson.put("log", "success");
+			}
 		} else { //게시글 없을 때
 			mapJson.put("result", "fail");
 			mapJson.put("message", "잘못된 접근입니다.");
@@ -92,6 +99,9 @@ public class BoardRestController {
 			mapJson.put("result", "success");
 			mapJson.put("message", "글이 등록 되었습니다.");
 			mapJson.put("redirectUrl", "/board/main");
+			if(boardLogService.createBoardWriteLog(boardDTO, ur_id)) {
+				mapJson.put("log", "success");
+			}
 		} else {
 			mapJson.put("result", "fail");
 			mapJson.put("message", "다시 시도하세요.");
@@ -113,6 +123,9 @@ public class BoardRestController {
 			mapJson.put("result", "success");
 			mapJson.put("message", "글이 수정 되었습니다.");
 			mapJson.put("redirectUrl", "/board/detail?bd_no=" + bd_no);
+			if(boardLogService.createBoardModifyLog(boardDTO, ur_id)) {
+				mapJson.put("log", "success");
+			}
 		} else {
 			mapJson.put("result", "fail");
 			mapJson.put("message", "다시 시도하세요.");
@@ -133,6 +146,9 @@ public class BoardRestController {
 			mapJson.put("result", "success");
 			mapJson.put("message", "글이 삭제되었습니다.");
 			mapJson.put("redirectUrl", "/board/main");
+			if(boardLogService.createBoardDeleteLog(boardDTO, ur_id)) {
+				mapJson.put("log", "success"); 
+			}
 		} else {
 			mapJson.put("result", "fail");
 			mapJson.put("message", "다시 시도하세요.");
@@ -145,7 +161,6 @@ public class BoardRestController {
 	public Map<String, Object> getBoards() {
 		Map<String, Object> mapJson = new HashMap<>();
 		// JWT 토큰 없으면 뱉기
-		// CSRF 방어도 하나 필요 해 보임
 		List<BoardDTO> list = boardService.getAllBoards();
 
 		mapJson.put("result", "success");
