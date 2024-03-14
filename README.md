@@ -34,4 +34,5 @@
 4. **게시판 CRUD**: 로그인 상태에서 게시물 작성, 조회, 수정, 삭제 가능 (Oracle)
 5. **로그 생성**: 사용자 접속시 로그 생성하여 DB 저장 (MongoDB)
 
-## 블로그 : https://velog.io/@nochristmas/posts
+## 구현 사진
+![KakaoTalk_20240313_165611317](https://github.com/NoChristmas/ToyProject01/assets/127386254/48c89332-7b99-47c7-abd0-2ad2fc2e5d22)
