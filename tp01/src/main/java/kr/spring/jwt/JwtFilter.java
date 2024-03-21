@@ -30,8 +30,12 @@ public class JwtFilter extends GenericFilterBean {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		
 		String token = cookieService.getCookie(httpRequest, "token");
-		//String token = resolveToken(httpRequest);
+		if(token.equals("")) {
+			token = resolveToken(httpRequest);
+		}
+		
 		if(StringUtils.hasText(token) && jwtProvider.validateToken(token)) {
 			Authentication authenticate = jwtProvider.getAuthentication(token);
 			SecurityContextHolder.getContext().setAuthentication(authenticate);

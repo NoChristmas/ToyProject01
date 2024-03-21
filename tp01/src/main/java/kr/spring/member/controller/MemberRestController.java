@@ -53,6 +53,7 @@ public class MemberRestController {
 			return mapJson;
 		}
 		String token = memberService.createToken(ur_id);
+		mapJson.put("token", token);
 		cookieService.addCookie(response,"token",token);
 		if(memberLogService.createMemberLoginLog(memberDTO)) {
 			mapJson.put("log", "success");
