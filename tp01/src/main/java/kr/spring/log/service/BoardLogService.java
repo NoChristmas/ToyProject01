@@ -36,7 +36,7 @@ public class BoardLogService {
 		memberLogEntity.setUrId(ur_id);
 		memberLogEntity.setType("Board");
 		memberLogEntity.setRegTime(currentTime);
-		memberLogEntity.setContent(ur_id+" 님이 게시판 번호"+boardDTO.getBd_no()+"를 작성하셨습니다.");
+		memberLogEntity.setContent(ur_id+" 님이 게시글 "+boardDTO.getBd_name()+"를 작성하셨습니다.");
 		
 		logRepository.save(memberLogEntity);
 		return true;
