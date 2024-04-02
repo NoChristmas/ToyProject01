@@ -14,7 +14,7 @@ public class BoardException extends RuntimeException {
 		this.boardExceptionCode = boardExceptionCode;
 	}
 	
-	//getters
+	//getters this is for commit & push
 	public BoardExceptionCode getBoardExceptionCode() {
 		return boardExceptionCode;
 	}
